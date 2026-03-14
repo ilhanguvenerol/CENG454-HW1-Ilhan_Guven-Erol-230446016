@@ -47,5 +47,9 @@ public class FlightController : MonoBehaviour
     private void HandleThrust()
     {
         // TODO (Task 3-D): 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(transform.forward * thrustSpeed * Time.deltaTime);
+        }
     }
 }
