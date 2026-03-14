@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class FlightController : MonoBehaviour
 {
-    [SerializeField] private float pitchSpeed = 45f;  // degrees/second 
-    [SerializeField] private float yawSpeed = 45f;  // degrees/second 
-    [SerializeField] private float rollSpeed = 45f;  // degrees/second 
+    [SerializeField] private float pitchSpeed = 45f;  // degrees/second pitch: up/down
+    [SerializeField] private float yawSpeed = 45f;  // degrees/second yaw: left/right
+    [SerializeField] private float rollSpeed = 45f;  // degrees/second roll: tilt left/right
     [SerializeField] private float thrustSpeed = 5f;   // units/second 
 
     // TODO (Task 3-A): Declare a private Rigidbody field named 'rb'
+    private Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
         // TODO (Task 3-B): Cache GetComponent<Rigidbody>() into 'rb'. 
         //                  Then set rb.freezeRotation = true. 
         //                  Why is freezeRotation needed? Answer in your PDF. 
