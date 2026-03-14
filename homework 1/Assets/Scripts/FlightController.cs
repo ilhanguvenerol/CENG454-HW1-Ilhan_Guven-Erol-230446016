@@ -38,9 +38,9 @@ public class FlightController : MonoBehaviour
         pitchSpeed = Input.GetAxis("Pitch") * pitchSpeed; // pitch up/down with W/S or Up/Down Arrow keys
         yawSpeed = Input.GetAxis("Yaw") * yawSpeed; // yaw left/right with mouse movement
 
-        rb.AddTorque(transform.forward * rollSpeed);
-        rb.AddTorque(transform.right * pitchSpeed);
-        rb.AddTorque(transform.up * yawSpeed);
+        rb.AddTorque(transform.forward * rollSpeed * Time.deltaTime);
+        rb.AddTorque(transform.right * pitchSpeed * Time.deltaTime);
+        rb.AddTorque(transform.up * yawSpeed * Time.deltaTime);
 
     }
 
