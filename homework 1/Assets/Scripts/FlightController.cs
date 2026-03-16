@@ -14,14 +14,7 @@ public class FlightController : MonoBehaviour
     // TODO (Task 3-A): Declare a private Rigidbody field named 'rb'
     private Rigidbody rb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        // TODO (Task 3-B): Cache GetComponent<Rigidbody>() into 'rb'. 
-        //                  Then set rb.freezeRotation = true. 
-        //                  Why is freezeRotation needed? Answer in your PDF. 
-    }
+    //removed freezerotation as it will prevent physics based rotations which i prefer
 
     void Update()// or FixedUpdate() 
     {
