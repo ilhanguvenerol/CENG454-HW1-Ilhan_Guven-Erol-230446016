@@ -12,7 +12,7 @@ public class FlightController : MonoBehaviour
     [SerializeField] private float thrustSpeed = 5f;   // units/second 
 
     // TODO (Task 3-A): Declare a private Rigidbody field named 'rb'
-    private Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
     //removed freezerotation as it will prevent physics based rotations which i prefer
 
