@@ -35,10 +35,8 @@ public class FlightController : MonoBehaviour
         float pitch = Input.GetAxis("Pitch") * pitchSpeed; // pitch up/down with W/S or Up/Down Arrow keys
         float yaw = Input.GetAxis("Yaw") * yawSpeed; // yaw left/right with mouse movement
 
-        // Build torque in local body space, then convert to world space for AddTorque
-        Vector3 localTorque = new Vector3(pitch, yaw, roll);
-        rb.AddTorque(transform.TransformDirection(localTorque), ForceMode.Acceleration);
-    }
+        transform.Rotate(pitch, roll, yaw, Space.Self);
+    } 
 
     private void HandleThrust()
     {
