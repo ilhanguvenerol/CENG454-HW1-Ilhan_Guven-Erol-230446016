@@ -15,6 +15,12 @@ public class FlightController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
 
     //removed freezerotation as it will prevent physics based rotations which i prefer
+
+    //i removed physics based rotations therefore freezerotaion is back
+    void Awake()
+    {
+        rb.freezeRotation = true;
+    }
     void Start()
     {
          toggleAccel = 0;
