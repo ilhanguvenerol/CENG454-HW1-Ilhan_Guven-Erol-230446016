@@ -10,23 +10,26 @@ public class FlightController : MonoBehaviour
     [SerializeField] private float yawSpeed = 45f;  // degrees/second yaw: left/right
     [SerializeField] private float rollSpeed = 45f;  // degrees/second roll: tilt left/right
     [SerializeField] private float thrustSpeed = 5f;   // units/second 
-
+    private int toggleAccel;
     // TODO (Task 3-A): Declare a private Rigidbody field named 'rb'
-    private Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
+    //removed freezerotation as it will prevent physics based rotations which i prefer
+
+    //i removed physics based rotations therefore freezerotaion is back
+    void Awake()
+    {
+        rb.freezeRotation = true;
+    }
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        // TODO (Task 3-B): Cache GetComponent<Rigidbody>() into 'rb'. 
-        //                  Then set rb.freezeRotation = true. 
-        //                  Why is freezeRotation needed? Answer in your PDF. 
+         toggleAccel = 0;
     }
-
     void Update()// or FixedUpdate() 
     {
         HandleRotation();
         HandleThrust();
+        ToggleThrust();
     }
 
     private void HandleRotation()
@@ -34,22 +37,30 @@ public class FlightController : MonoBehaviour
         // TODO (Task 3-C): 
         // Pitch   
         // Roll    
-        rollSpeed = Input.GetAxis("Roll") * rollSpeed; // roll left/right with A/D or Left/Right Arrow keys
-        pitchSpeed = Input.GetAxis("Pitch") * pitchSpeed; // pitch up/down with W/S or Up/Down Arrow keys
-        yawSpeed = Input.GetAxis("Yaw") * yawSpeed; // yaw left/right with mouse movement
+        float roll = Input.GetAxis("Roll") * rollSpeed * Time.deltaTime; // roll left/right with A/D or Left/Right Arrow keys
+        float pitch = Input.GetAxis("Pitch") * pitchSpeed * Time.deltaTime; // pitch up/down with W/S or Up/Down Arrow keys
+        float yaw = Input.GetAxis("Yaw") * yawSpeed * Time.deltaTime; // yaw left/right with mouse movement
 
-        rb.AddTorque(transform.forward * rollSpeed * Time.deltaTime);
-        rb.AddTorque(transform.right * pitchSpeed * Time.deltaTime);
-        rb.AddTorque(transform.up * yawSpeed * Time.deltaTime);
-
-    }
+        transform.Rotate(pitch, roll, yaw, Space.Self);
+    } 
 
     private void HandleThrust()
     {
-        // TODO (Task 3-D): 
-        if (Input.GetKey(KeyCode.Space))
+
+        Vector3 thrustVector = transform.forward * toggleAccel * thrustSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + thrustVector);
+        Debug.Log("Thrust: " + (toggleAccel * thrustSpeed));
+    }
+
+    private void ToggleThrust() 
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(transform.forward * thrustSpeed * Time.deltaTime);
+            toggleAccel = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            toggleAccel = 0;
         }
     }
 }
