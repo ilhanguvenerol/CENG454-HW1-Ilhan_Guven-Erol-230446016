@@ -41,7 +41,7 @@ public class FlightController : MonoBehaviour
         float pitch = Input.GetAxis("Pitch") * pitchSpeed * Time.deltaTime; // pitch up/down with W/S or Up/Down Arrow keys
         float yaw = Input.GetAxis("Yaw") * yawSpeed * Time.deltaTime; // yaw left/right with mouse movement
 
-        transform.Rotate(pitch, roll, yaw, Space.Self);
+        transform.Rotate(pitch, roll, -yaw, Space.Self);
     } 
 
     private void HandleThrust()
