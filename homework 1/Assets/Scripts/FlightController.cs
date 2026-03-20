@@ -37,11 +37,11 @@ public class FlightController : MonoBehaviour
         // TODO (Task 3-C): 
         // Pitch   
         // Roll    
-        float roll = Input.GetAxis("Roll") * rollSpeed * Time.deltaTime; // roll left/right with A/D or Left/Right Arrow keys
-        float pitch = Input.GetAxis("Pitch") * pitchSpeed * Time.deltaTime; // pitch up/down with W/S or Up/Down Arrow keys
-        float yaw = Input.GetAxis("Yaw") * yawSpeed * Time.deltaTime; // yaw left/right with mouse movement
+        float roll = Input.GetAxis("Roll") * rollSpeed * Time.deltaTime; // roll left/right with Q/E
+        float pitch = Input.GetAxis("Pitch") * pitchSpeed * Time.deltaTime; // pitch up/down with W/S
+        float yaw = Input.GetAxis("Yaw") * yawSpeed * Time.deltaTime; // yaw left/right with A/D
 
-        transform.Rotate(pitch, roll, yaw, Space.Self);
+        transform.Rotate(pitch, roll, -yaw, Space.Self);
     } 
 
     private void HandleThrust()
